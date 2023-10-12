@@ -5,7 +5,7 @@ const initialConfiguration = [
   1, 2, 0, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15,
 ];
 
-const checkIsArraySorted = (arr: number[]) => {
+const isArraySorted = (arr: number[]) => {
   for (let index = 1; index < arr.length; index++) {
     if (arr[index] - arr[index - 1] !== 1) {
       return false;
@@ -20,7 +20,7 @@ function App() {
   createEffect(() => {
     const config = configuration();
     if (config.at(-1) === 0) {
-      const isSorted = checkIsArraySorted(config.slice(0, config.length - 1));
+      const isSorted = isArraySorted(config.slice(0, config.length - 1));
       if (isSorted) {
         alert('Congratulations! You are a winner!');
       }
