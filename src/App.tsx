@@ -1,4 +1,4 @@
-import { For, createEffect, createSignal } from 'solid-js';
+import { Index, Show, createEffect, createSignal } from 'solid-js';
 import styles from './App.module.css';
 
 const initialConfiguration = [
@@ -27,8 +27,7 @@ function App() {
     }
   });
 
-  const handleTileClick = (tile: number) => () => {
-    const tileIndex = configuration().indexOf(tile);
+  const handleTileClick = (tileIndex: number) => () => {
     const zeroIndex = configuration().indexOf(0);
 
     const isInOneRow = Math.floor(zeroIndex / 4) === Math.floor(tileIndex / 4);
@@ -47,16 +46,15 @@ function App() {
 
   return (
     <div class={styles.board}>
-      <For each={configuration()} fallback={<div>Nothing to render 🤷</div>}>
-        {(tile) => {
-          if (tile === 0) return <div />;
-          return (
-            <div class={styles.tile} onClick={handleTileClick(tile)}>
-              {tile}
+      <Index each={configuration()} fallback={<div>Nothing to render 🤷</div>}>
+        {(tile, index) => (
+          <Show when={tile() !== 0} fallback={<div />}>
+            <div class={styles.tile} onClick={handleTileClick(index)}>
+              {tile()}
             </div>
-          );
-        }}
-      </For>
+          </Show>
+        )}
+      </Index>
     </div>
   );
 }
