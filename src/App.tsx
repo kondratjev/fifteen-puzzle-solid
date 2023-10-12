@@ -31,10 +31,10 @@ function App() {
     const zeroIndex = configuration().indexOf(0);
 
     const isInOneRow = Math.floor(zeroIndex / 4) === Math.floor(tileIndex / 4);
-    const isSibling = Math.abs(zeroIndex - tileIndex) === 1;
+    const isNeighbor = Math.abs(zeroIndex - tileIndex) === 1;
     const isInColumn = Math.abs(zeroIndex - tileIndex) === 4;
 
-    if ((isInOneRow && isSibling) || isInColumn) {
+    if ((isInOneRow && isNeighbor) || isInColumn) {
       setConfiguration((oldConfig) => {
         const newConfig = [...oldConfig];
         newConfig[zeroIndex] = newConfig[tileIndex];
