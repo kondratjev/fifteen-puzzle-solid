@@ -1,0 +1,26 @@
+{
+  "tabWidth": 2,
+  "useTabs": true,
+  "semi": true,
+  "trailingComma": "all",
+  "singleQuote": true,
+  "importOrder": [
+    "<THIRD_PARTY_MODULES>",
+    "^api(/.*)$",
+    "^assets(/.*)$",
+    "^consts(/.*)$",
+    "^hooks(/.*)$",
+    "^features(/.*)$",
+    "^helpers(/.*)$",
+    "^routes(/.*)$",
+    "^screens(/.*)$",
+    "^store(/.*)$",
+    "^types(/.*)$",
+    "^ui-kit(/.*)$",
+    "^[../]",
+    "^[./]"
+  ],
+  "importOrderSeparation": true,
+  "importOrderSortSpecifiers": true,
+  "importOrderCaseInsensitive": true
+}
