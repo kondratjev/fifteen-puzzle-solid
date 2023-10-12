@@ -1,4 +1,4 @@
-import { createEffect, createSignal } from 'solid-js';
+import { For, createEffect, createSignal } from 'solid-js';
 import styles from './App.module.css';
 
 const initialConfiguration = [
@@ -27,14 +27,15 @@ function App() {
     }
   });
 
-  const handleTileClick = (tileIndex: number) => () => {
+  const handleTileClick = (tile: number) => () => {
+    const tileIndex = configuration().indexOf(tile);
     const zeroIndex = configuration().indexOf(0);
 
     const isInOneRow = Math.floor(zeroIndex / 4) === Math.floor(tileIndex / 4);
     const isNeighbor = Math.abs(zeroIndex - tileIndex) === 1;
-    const isInColumn = Math.abs(zeroIndex - tileIndex) === 4;
+    const isInOneColumn = Math.abs(zeroIndex - tileIndex) === 4;
 
-    if ((isInOneRow && isNeighbor) || isInColumn) {
+    if ((isInOneRow && isNeighbor) || isInOneColumn) {
       setConfiguration((oldConfig) => {
         const newConfig = [...oldConfig];
         newConfig[zeroIndex] = newConfig[tileIndex];
@@ -46,14 +47,16 @@ function App() {
 
   return (
     <div class={styles.board}>
-      {configuration().map((tile, index) => {
-        if (tile === 0) return <div />;
-        return (
-          <div class={styles.tile} onClick={handleTileClick(index)}>
-            {tile}
-          </div>
-        );
-      })}
+      <For each={configuration()} fallback={<div>Nothing to render 🤷</div>}>
+        {(tile) => {
+          if (tile === 0) return <div />;
+          return (
+            <div class={styles.tile} onClick={handleTileClick(tile)}>
+              {tile}
+            </div>
+          );
+        }}
+      </For>
     </div>
   );
 }
